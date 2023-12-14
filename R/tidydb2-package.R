@@ -1,4 +1,7 @@
 #' @import magrittr
+#' @importFrom methods new
+#' @importFrom utils str
+#' 
 #' @keywords internal
 "_PACKAGE"
 
