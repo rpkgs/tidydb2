@@ -1,0 +1,60 @@
+---
+title: "database_config"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{database_config}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## 如何配置数据库
+
+```{r setup}
+# library(tidydb2)
+usethis::edit_file("~/.db.yml")
+```
+
+按照如下格式填写，可以填写多个配置。
+在不指定`name`或`dbname`的情况下，默认读取第一个。
+
+```
+kong-nas:
+  host: kong-nas
+  user: CUG
+  pwd: passwd
+  port: 3306
+  dbname:
+    - ChinaMet
+    
+remote-nas:
+  host: xxxhydro.top
+  user: CUG
+  pwd: pwd
+  port: 2306
+  dbname: 
+    - ChinaMet
+
+default: kong-nas
+```
+
+## 测试连接
+
+> 这里有改进空间
+
+```{r, eval=FALSE}
+# source('scripts/main_pkgs.R')
+config = yaml::read_yaml("~/.db.yml")
+dbinfo = get_dbInfo() # see which db to read
+
+con_mysql = open_mysql()
+con_mariadb = open_mariadb(1, dbinfo)
+```
+
+

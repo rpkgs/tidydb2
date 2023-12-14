@@ -19,8 +19,33 @@ setMethod("dbSendQuery", c("MySQLConnection", "character"),
   }
 )
 
+#' get_dbInfo
+#' 
+#' Get DataBase info from `~/.db.yml`. You need to write config first, see 
+#' `vignette("database_config")` for details.
+#' 
+#' @importFrom purrr `%||%`
+#' @export
+get_dbInfo <- function(name = NULL) {
+  config = yaml::read_yaml("~/.db.yml")
+  name = name %||% names(config)[1]
+  if(name == "all") config else config[[name]]
+}
+
+#' Con database connection
+#' 
+#' @examples 
+#' \dontrun{
+#' dbinfo = get_dbInfo() # see which db to read
+#' open_mysql()
+#' open_mariadb()
+#' }
+#' 
+#' @export 
 #' @import DBI
-open_mysql <- function(dbinfo, dbname=1) {
+open_mysql <- function(dbname=1, dbinfo=NULL) {
+  dbinfo = dbinfo %||% get_dbInfo()
+  
   if (is.numeric(dbname)) dbname = dbinfo$dbname[dbname]  
   bold(Ipaper::ok(sprintf("[info] opening db: %s", dbname)))
 
@@ -39,7 +64,11 @@ open_mysql <- function(dbinfo, dbname=1) {
   return(con)
 }
 
-open_mariadb <- function(dbinfo, dbname=1) {
+#' @rdname open_mysql
+#' @export 
+open_mariadb <- function(dbname=1, dbinfo=NULL) {
+  dbinfo = dbinfo %||% get_dbInfo()
+  
   if (is.numeric(dbname)) dbname = dbinfo$dbname[dbname]  
   bold(ok(sprintf("[info] opening db: %s", dbname)))
 
@@ -61,13 +90,14 @@ open_mariadb <- function(dbinfo, dbname=1) {
   return(con)
 }
 
-
+#' @export
 db_info <- function(con) {
   str(dbGetInfo(con))
 }
 
 # copy_to(con, st_met2481)
 # `copy_to` not work for mysql
+#' @export 
 tbl_copy <- function(con, tbl, tbl_name = NULL, overwrite = TRUE, row.names=FALSE, ...) {
   if (is.null(tbl_name)) tbl_name = deparse(substitute(tbl))
   t = system.time({
@@ -81,11 +111,13 @@ tbl_copy <- function(con, tbl, tbl_name = NULL, overwrite = TRUE, row.names=FALS
   DBI::dbExecute(con, cmd_encode)
 }
 
+#' @export 
 db_append <- function(con, tbl, values) {
   dbWriteTable(con, tbl, values, append = TRUE)
 }
 
 
+#' @export 
 dbRemoveTables_like <- function(con, pattern="dbplyr", del=TRUE) {
   tbls_bad = dbListTables(con) %>% .[grep(pattern, .)]
   # print(tbls_bad)  
@@ -96,6 +128,7 @@ dbRemoveTables_like <- function(con, pattern="dbplyr", del=TRUE) {
 }
 
 
+#' @export 
 import_table_large <- function(con, df, table, chunksize=1e6) {
   n = nrow(df)
   # chunksize = 1e6
