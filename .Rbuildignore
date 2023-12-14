@@ -1,4 +1,3 @@
-^tidydb\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^data-raw$
@@ -9,3 +8,4 @@
 ^Figures$
 ^OUTPUT$
 ^inst$
+^tidydb2\.Rproj$

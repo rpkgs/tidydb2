@@ -1,0 +1,76 @@
+```{r}
+#! /usr/bin/Rscript --no-init-file
+# Dongdong Kong ----------------------------------------------------------------
+# Copyright (c) 2022 Dongdong Kong. All rights reserved.
+```
+
+## 登录数据库
+```{r}
+devtools::load_all()
+library(Ipaper)
+library(tidymet)
+
+# source('scripts/main_pkgs.R')
+config = yaml::read_yaml("env/db_userinfo.yml")
+dbinfo = config$`remote-nas`
+
+con_mysql = open_mysql(dbinfo, 1)
+con_mariadb = open_mariadb(dbinfo, 1)
+# con
+```
+
+```{r}
+table = tbl(con, "China_Mete2000_hourly_2020_2022")
+```
+
+
+## 测试基础命令
+
+```{r}
+df = st_met2176_hourly
+# st_met2481 = readxl::read_xlsx("st_met2481.xlsx")
+# , indexes=c("site")
+# , indexes=c("site")
+copy_to(con_mysql, st_met2176_hourly, "st_hourly_met2176", overwrite=TRUE, temporary = FALSE)
+
+t1 = system.time({
+  copy_to(con_mysql, df, "temp01", overwrite=TRUE, temporary = FALSE)
+})
+
+t2 = system.time({
+  copy_to(con_mariadb, df, "temp02", overwrite=TRUE, temporary = FALSE)
+})
+
+```
+
+
+```{r}
+copy_to(con, mtcars, overwrite=TRUE, indexes=c("cyl"))
+table = tbl(con, "mtcars")
+data = collect(table)[1:10, ]
+
+rows_append(table, data, copy=TRUE)
+rows_append(table, data, copy=TRUE, in_place=TRUE)
+```
+
+## 测试索引
+
+> 站点的索引可以发挥很大作用
+```{r}
+system.time({
+  d = table |> filter(site==50136)
+  collect(d)
+})
+  #  user  system elapsed
+  #  0.00    0.01    0.28
+```
+
+> 测试日期的索引
+```{r}
+date0 = make_date(2020)
+system.time({
+  # d = table |> filter(date==date0)
+  d = table |> filter(year==2020L, month==1L, day==1L)
+  collect(d)
+})
+```

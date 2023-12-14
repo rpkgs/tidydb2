@@ -96,7 +96,7 @@ dbRemoveTables_like <- function(con, pattern="dbplyr", del=TRUE) {
 }
 
 
-import_table_large <- function(df, table, chunksize=1e6) {
+import_table_large <- function(con, df, table, chunksize=1e6) {
   n = nrow(df)
   # chunksize = 1e6
   chunks = ceiling(n/chunksize)
