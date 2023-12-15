@@ -37,6 +37,12 @@
     <loc>/reference/open_mysql.html</loc>
   </url>
   <url>
+    <loc>/reference/reexports.html</loc>
+  </url>
+  <url>
     <loc>/reference/tidydb2-package.html</loc>
+  </url>
+  <url>
+    <loc>/reference/timeinfo.html</loc>
   </url>
 </urlset>
