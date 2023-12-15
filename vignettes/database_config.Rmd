@@ -56,5 +56,3 @@ dbinfo = get_dbInfo() # see which db to read
 con_mysql = open_mysql()
 con_mariadb = open_mariadb(1, dbinfo)
 ```
-
-

@@ -10,7 +10,10 @@
 # library(tidydb) # pak::pkg_install(c("rpkgs/tidydb", "rpkgs/tidymet"))
 
 #' @import DBI dplyr crayon
+#' @importMethodsFrom DBI dbSendQuery
+#' @importMethodsFrom RMySQL dbSendQuery
 setMethod("dbSendQuery", c("MySQLConnection", "character"),
+  # import S4 method from RMySQL
   function(conn, statement, ...) {
     RMySQL:::checkValid(conn)
 
@@ -115,7 +118,6 @@ tbl_copy <- function(con, tbl, tbl_name = NULL, overwrite = TRUE, row.names=FALS
 db_append <- function(con, tbl, values) {
   dbWriteTable(con, tbl, values, append = TRUE)
 }
-
 
 #' @export 
 dbRemoveTables_like <- function(con, pattern="dbplyr", del=TRUE) {

@@ -1,0 +1,38 @@
+```{r}
+library(duckdb)
+library(data.table)
+library(dplyr)
+
+db = "z:/DATA/China/ChinaMet_hourly_mete2000/data/China_Mete2000_hourly_full_2020-2022_tidy.duckdb"
+
+f = "z:/DATA/China/ChinaMet_hourly_mete2000/data/China_Mete2000_hourly_full_2020-2022_tidy.csv"
+
+```
+
+# 写入数据
+
+```{r}
+# Create a connection to DuckDB
+con <- dbConnect(duckdb::duckdb(db))
+
+df = fread(f)
+# Import the CSV file into DuckDB
+duckdb::dbWriteTable(con, "China_Mete2000_hourly_2020_2022", df)
+
+# Close the connection
+dbDisconnect(con)
+```
+
+# 读取数据
+
+```{r}
+dbDisconnect(con, shutdown = TRUE)
+
+dbExecute(con, "CREATE INDEX idx_site ON 'China_Mete2000_hourly_full_2020-2022' (site)")
+
+dbDisconnect(con)
+```
+
+```{r}
+
+```

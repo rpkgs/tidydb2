@@ -1,0 +1,26 @@
+---
+title: "database_tidydata"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{database_tidydata}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## 测试读取和清洗数据
+
+```{r setup}
+library(tidydb2)
+```
+
+```{r}
+
+```
+

@@ -8,14 +8,17 @@ Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Imports:
     methods,
+    R6,
     magrittr, purrr,
     dbplyr, dplyr, 
     DBI, 
+    duckdb,
     RMySQL, 
     crayon
 Suggests: 
     knitr,
     RMariaDB,
+    usethis,
     rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
