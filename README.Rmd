@@ -1,0 +1,72 @@
+---
+output: github_document
+---
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#",
+  fig.width = 10, fig.height = 5,
+  fig.align = "center",
+  fig.path  = "man/Figure/",
+  dev = 'svg'
+)
+```
+
+# tidydb2
+
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/rpkgs/tidydb2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rpkgs/tidydb2/actions/workflows/R-CMD-check.yaml)
+[![codecov](https://codecov.io/gh/rpkgs/tidydb2/branch/master/graph/badge.svg)](https://app.codecov.io/gh/rpkgs/tidydb2)
+<!-- [![CRAN](http://www.r-pkg.org/badges/version/tidydb2)](https://cran.r-project.org/package=tidydb2) -->
+<!-- [![total](http://cranlogs.r-pkg.org/badges/grand-total/tidydb2)](https://www.rpackages.io/package/tidydb2) -->
+<!-- [![monthly](http://cranlogs.r-pkg.org/badges/tidydb2)](https://www.rpackages.io/package/tidydb2) -->
+<!-- badges: end -->
+
+## Goals
+
+> 更便捷的访问数据库
+
+建立气象数据库，一行命令查询数据。
+
+## TODO
+
+- [ ] 读取数据的性能测试
+
+- [ ] 添加写入数据的函数
+
+## Installation
+
+```r
+remotes::install_github("rpkgs/tidydb2")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r}
+library(tidydb2)
+library(dplyr)
+library(Ipaper)
+
+## hourly气象数据
+dbinfo <- get_dbInfo("duckdb")
+f <- dbinfo$hourly_2020_2022$db
+db <- dbase$new(f)
+db
+
+site0 = 50246L
+date0 <- make_datetime(2022, 1, 1, 0)
+
+# 0.1s可以读回数据, 这里应该是UTC时间
+system.time(
+  d <- db$tbl |>
+    filter(site == site0, date > date0) |>
+    select(date, PRS, TEM, RHU, tigan) |>
+    collect()
+)
+
+print(d)
+db$close()
+```

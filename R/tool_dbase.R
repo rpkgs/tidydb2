@@ -1,17 +1,3 @@
-
-#' @import DBI dplyr crayon
-#' @importMethodsFrom DBI dbSendQuery
-#' @importMethodsFrom RMySQL dbSendQuery
-setMethod("dbSendQuery", c("MySQLConnection", "character"),
-  # import S4 method from RMySQL
-  function(conn, statement, ...) {
-    RMySQL:::checkValid(conn)
-
-    rsId <- .Call( RMySQL:::RS_MySQL_exec, conn@Id, as.character(statement))
-    new("MySQLResult", Id = rsId)
-  }
-)
-
 #' @export
 db_info <- function(con) {
   str(dbGetInfo(con))
