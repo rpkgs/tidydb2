@@ -1,5 +1,5 @@
 #' Database class for duckdb and sqlite
-#' 
+#'
 #' @field db a character string specifying a database name.
 #' @field table a character string specifying a table name.
 #' @field con a database connection object.
@@ -9,6 +9,7 @@
 #' @param table a character string specifying a table name.
 #' @param tables a character vector specifying table names.
 #'
+#' @param ... ignored
 #' @param overwrite a logical specifying whether to overwrite an existing table or not. Its default is FALSE.
 #' @param append a logical specifying whether to append to an existing table in the DBMS. Its default is FALSE.
 #' 
@@ -20,40 +21,54 @@ dbase <- R6Class("dbase", list(
   table = NULL,
   con = NULL,
   tbl = NULL,
-  
+
   #' @return NULL
-  initialize = function(db = NULL, table = NULL) {
-    dbinfo <- get_dbInfo("duckdb")[[1]] # 默认是第一个
-    if (is.null(db)) db <- dbinfo$db
-    self$db <- db
+  initialize = function(db = NULL, table = NULL, ...) {
     # type <- match.arg(type)
     # self$type <- type
-    type = tools::file_ext(db)
-    if (type == "duckdb") {
-      self$con <- dbConnect(duckdb::duckdb(), dbdir = self$db, read_only = TRUE)
-    } else if (type %in% c("db", "sqlite")) {
-      self$con <- dbConnect(RSQLite::SQLite(), self$db)
-    }
-    self$open_table(table)
+    self$open_db(db, table, ...)
   },
 
   #' @return NULL
-  open_table = function(table) {
-    if (is.null(table)) table <- DBI::dbListTables(self$con)[1]
-    self$table <- table
-    self$tbl <- tbl(self$con, self$table)
-  },
-
-  #' @param ... ignored
   print = function(...) {
-    fun = \(x) cat(green(x))
+    fun <- \(x) cat(green(x))
     fun(sprintf("[db   ]: %s\n", self$db))
-    fun(sprintf("[size ]: %.1f Mb\n", file.size(self$db)/1e6))
+    fun(sprintf("[size ]: %.1f Mb\n", file.size(self$db) / 1e6))
 
-    tables = DBI::dbListTables(db$con)
+    tables <- DBI::dbListTables(db$con)
     fun(sprintf("[Opened Table]: %s\n", self$table))
     fun(sprintf("[ALL   Tables]: %s\n", paste(tables, collapse = ", ")))
     print(self$tbl)
+  },
+
+  #' create a db if not exits
+  #' @param ... others to be passed to `duckdb::duckdb` or `RSQLite::SQLite`, or `dbConnect`
+  open_db = function(db = NULL, table = NULL, ...) {
+    dbinfo <- get_dbInfo("duckdb")[[1]] # 默认是第一个
+    if (is.null(db)) db <- dbinfo$db
+    self$db <- db
+    
+    if (is_duckdb(self$db)) {
+      con <- dbConnect(duckdb::duckdb(), dbdir = self$db, ...)
+    } else if (is_sqlite(self$db)) {
+      con <- dbConnect(RSQLite::SQLite(), self$db, ...)
+    }
+    
+    self$con <- con
+    self$open_table(table) # 可能会报错
+  },
+
+  #' @return NULL
+  open_table = function(table = NULL) {
+    tables = DBI::dbListTables(self$con)
+    if (is_empty(tables)) {
+      message("[warn] No table in current database!")
+      return()
+    }
+    
+    if (is.null(table)) table <- DBI::dbListTables(self$con)[1]
+    self$table <- table
+    self$tbl <- tbl(self$con, self$table)
   },
 
   #' close db
@@ -66,17 +81,15 @@ dbase <- R6Class("dbase", list(
   #' close db
   #' @return NULL
   close = function() {
-    # if (!force) {
-      DBI::dbDisconnect(self$con, shutdown = TRUE)
-    # } else {
-    #   duckdb::duckdb_shutdown(duckdb())
-    # }
+    # if not closed, then close it
+    if (dbIsValid(self$con)) DBI::dbDisconnect(self$con, shutdown = TRUE)
+    # duckdb::duckdb_shutdown(duckdb())
   },
 
   #' Read Tables
   #' @return list of `dataframe`
   read_tables = function(tables = NULL) {
-    if (is.null(tables)) tables = DBI::dbListTables(db$con)
+    if (is.null(tables)) tables <- DBI::dbListTables(db$con)
     tables %<>% set_names(., .)
     lapply(tables, \(table) collect(tbl(self$con, table)))
   },
@@ -109,9 +122,9 @@ dbase <- R6Class("dbase", list(
   #' are not case sensitive, e.g., table names ABC and abc are considered equal.
   #' @param ... others to be passed to `dbWriteTable`
   write_table = function(value, name = NULL, overwrite = TRUE, append = FALSE, ...) {
-    .name = deparse(substitute(value))
+    .name <- deparse(substitute(value))
     name %<>% `%||%`(.name)
-    if (append) overwrite = FALSE
+    if (append) overwrite <- FALSE
     dbWriteTable(self$con, name, value, overwrite = overwrite, append = append, ...)
   },
 
@@ -127,3 +140,5 @@ dbase <- R6Class("dbase", list(
     }
   }
 ))
+
+# 索引问题如何解决？

@@ -25,8 +25,9 @@ Database class for duckdb and sqlite
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-dbase-new}{\code{dbase$new()}}
-\item \href{#method-dbase-open_table}{\code{dbase$open_table()}}
 \item \href{#method-dbase-print}{\code{dbase$print()}}
+\item \href{#method-dbase-open_db}{\code{dbase$open_db()}}
+\item \href{#method-dbase-open_table}{\code{dbase$open_table()}}
 \item \href{#method-dbase-finalize}{\code{dbase$finalize()}}
 \item \href{#method-dbase-close}{\code{dbase$close()}}
 \item \href{#method-dbase-read_tables}{\code{dbase$read_tables()}}
@@ -42,7 +43,7 @@ Database class for duckdb and sqlite
 \if{latex}{\out{\hypertarget{method-dbase-new}{}}}
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dbase$new(db = NULL, table = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dbase$new(db = NULL, table = NULL, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -51,25 +52,8 @@ Database class for duckdb and sqlite
 \item{\code{db}}{a character string specifying a database name.}
 
 \item{\code{table}}{a character string specifying a table name.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-NULL
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-dbase-open_table"></a>}}
-\if{latex}{\out{\hypertarget{method-dbase-open_table}{}}}
-\subsection{Method \code{open_table()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dbase$open_table(table)}\if{html}{\out{</div>}}
-}
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{table}}{a character string specifying a table name.}
+\item{\code{...}}{ignored}
 }
 \if{html}{\out{</div>}}
 }
@@ -88,10 +72,53 @@ NULL
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{ignored
-close db}
+\item{\code{...}}{ignored}
 }
 \if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+NULL
+create a db if not exits
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-dbase-open_db"></a>}}
+\if{latex}{\out{\hypertarget{method-dbase-open_db}{}}}
+\subsection{Method \code{open_db()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dbase$open_db(db = NULL, table = NULL, ...)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{db}}{a character string specifying a database name.}
+
+\item{\code{table}}{a character string specifying a table name.}
+
+\item{\code{...}}{others to be passed to \code{duckdb::duckdb} or \code{RSQLite::SQLite}, or \code{dbConnect}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-dbase-open_table"></a>}}
+\if{latex}{\out{\hypertarget{method-dbase-open_table}{}}}
+\subsection{Method \code{open_table()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dbase$open_table(table = NULL)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{table}}{a character string specifying a table name.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+NULL
+close db
 }
 }
 \if{html}{\out{<hr>}}

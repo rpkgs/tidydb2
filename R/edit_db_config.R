@@ -13,6 +13,11 @@ edit_db_config <- function() {
 #' @export
 get_dbInfo <- function(name = NULL) {
   config <- yaml::read_yaml("~/.db.yml")
-  name <- name %||% names(config)[1]
-  if (name == "all") config else config[[name]]
+  if (file.exists(config)) {
+    name <- name %||% names(config)[1]
+    if (name == "all") config else config[[name]]
+  } else {
+    message("[warn] write db config first by `edit_db_config()`!")
+    NULL
+  }
 }
