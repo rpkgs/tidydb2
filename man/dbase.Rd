@@ -12,10 +12,13 @@ dbase
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-duckdb_base-new}{\code{dbase$new()}}
+\item \href{#method-duckdb_base-open_table}{\code{dbase$open_table()}}
 \item \href{#method-duckdb_base-print}{\code{dbase$print()}}
 \item \href{#method-duckdb_base-finalize}{\code{dbase$finalize()}}
 \item \href{#method-duckdb_base-close}{\code{dbase$close()}}
+\item \href{#method-duckdb_base-read_tables}{\code{dbase$read_tables()}}
 \item \href{#method-duckdb_base-read_table}{\code{dbase$read_table()}}
+\item \href{#method-duckdb_base-read_data}{\code{dbase$read_data()}}
 \item \href{#method-duckdb_base-clone}{\code{dbase$clone()}}
 }
 }
@@ -25,6 +28,15 @@ dbase
 \subsection{Method \code{new()}}{
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{dbase$new(db = NULL, table = NULL)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-duckdb_base-open_table"></a>}}
+\if{latex}{\out{\hypertarget{method-duckdb_base-open_table}{}}}
+\subsection{Method \code{open_table()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dbase$open_table(table)}\if{html}{\out{</div>}}
 }
 
 }
@@ -56,11 +68,29 @@ dbase
 
 }
 \if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-duckdb_base-read_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-duckdb_base-read_tables}{}}}
+\subsection{Method \code{read_tables()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dbase$read_tables(tables = NULL)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-duckdb_base-read_table"></a>}}
 \if{latex}{\out{\hypertarget{method-duckdb_base-read_table}{}}}
 \subsection{Method \code{read_table()}}{
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{dbase$read_table(..., verbose = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{dbase$read_table(table = NULL)}\if{html}{\out{</div>}}
+}
+
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-duckdb_base-read_data"></a>}}
+\if{latex}{\out{\hypertarget{method-duckdb_base-read_data}{}}}
+\subsection{Method \code{read_data()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dbase$read_data(..., verbose = TRUE)}\if{html}{\out{</div>}}
 }
 
 }

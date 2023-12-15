@@ -17,8 +17,9 @@ knitr::opts_chunk$set(
 ## 如何配置数据库
 
 ```{r setup}
-# library(tidydb2)
-usethis::edit_file("~/.db.yml")
+library(tidydb2)
+# usethis::edit_file("~/.db.yml")
+edit_db_config()
 ```
 
 按照如下格式填写，可以填写多个配置。
