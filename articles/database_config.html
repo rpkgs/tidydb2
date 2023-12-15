@@ -85,8 +85,11 @@
 <h2 id="如何配置数据库">如何配置数据库<a class="anchor" aria-label="anchor" href="#%E5%A6%82%E4%BD%95%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE%E5%BA%93"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># library(tidydb2)</span></span>
-<span><span class="fu">usethis</span><span class="fu">::</span><span class="fu"><a href="https://usethis.r-lib.org/reference/edit_file.html" class="external-link">edit_file</a></span><span class="op">(</span><span class="st">"~/.db.yml"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">tidydb2</span><span class="op">)</span></span>
+<span><span class="co"># usethis::edit_file("~/.db.yml")</span></span>
+<span><span class="fu">edit_db_config</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in normalizePath("~/.db.yml"): path[1]="/home/runner/.db.yml": No such</span></span>
+<span><span class="co">#&gt; file or directory</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">•</span> Edit <span style="color: #0000BB;">'/home/runner/.db.yml'</span></span></span></code></pre></div>
 <p>按照如下格式填写，可以填写多个配置。
 在不指定<code>name</code>或<code>dbname</code>的情况下，默认读取第一个。</p>
