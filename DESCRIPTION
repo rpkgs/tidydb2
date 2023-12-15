@@ -17,7 +17,7 @@ Imports:
     crayon
 Suggests: 
     knitr,
-    RMariaDB,
+    RMariaDB, RSQLite,
     usethis,
     rmarkdown,
     testthat (>= 3.0.0)
