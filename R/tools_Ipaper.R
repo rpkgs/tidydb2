@@ -10,7 +10,13 @@ is_empty <- function(x) {
   is.null(x) || (is.data.frame(x) && nrow(x) == 0) || length(x) == 0
 }
 
-
+`%||%` <- function(x, y) {
+  if (is.null(x)) {
+    y
+  } else {
+    x
+  }
+}
 
 is_duckdb <- function(f) {
   ext <- tools::file_ext(f)

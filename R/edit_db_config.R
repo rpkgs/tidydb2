@@ -9,7 +9,6 @@ edit_db_config <- function() {
 #' Get DataBase info from `~/.db.yml`. You need to write config first, see
 #' `vignette("database_config")` for details.
 #'
-#' @importFrom purrr `%||%`
 #' @export
 get_dbInfo <- function(name = NULL) {
   f = normalizePath("~/.db.yml")

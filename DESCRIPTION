@@ -9,11 +9,13 @@ License: MIT + file LICENSE
 Imports:
     methods,
     R6,
-    magrittr, purrr,
+    magrittr, 
+    data.table, 
+    lubridate, 
     dbplyr, dplyr, 
     DBI, 
-    duckdb,
     RMySQL, 
+    duckdb,
     crayon
 Suggests: 
     knitr,
