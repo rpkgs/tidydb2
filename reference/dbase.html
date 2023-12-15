@@ -86,8 +86,9 @@ Database class for duckdb and sqlite"><!-- mathjax --><script src="https://cdnjs
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-dbase-new"><code>dbase$new()</code></a></p></li>
-<li><p><a href="#method-dbase-open_table"><code>dbase$open_table()</code></a></p></li>
 <li><p><a href="#method-dbase-print"><code>dbase$print()</code></a></p></li>
+<li><p><a href="#method-dbase-open_db"><code>dbase$open_db()</code></a></p></li>
+<li><p><a href="#method-dbase-open_table"><code>dbase$open_table()</code></a></p></li>
 <li><p><a href="#method-dbase-finalize"><code>dbase$finalize()</code></a></p></li>
 <li><p><a href="#method-dbase-close"><code>dbase$close()</code></a></p></li>
 <li><p><a href="#method-dbase-read_tables"><code>dbase$read_tables()</code></a></p></li>
@@ -101,7 +102,7 @@ Database class for duckdb and sqlite"><!-- mathjax --><script src="https://cdnjs
 
 <div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/dbase.html">dbase</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>db <span class="op">=</span> <span class="cn">NULL</span>, table <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/dbase.html">dbase</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>db <span class="op">=</span> <span class="cn">NULL</span>, table <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
@@ -114,6 +115,10 @@ Database class for duckdb and sqlite"><!-- mathjax --><script src="https://cdnjs
 <dd><p>a character string specifying a table name.</p></dd>
 
 
+<dt><code>...</code></dt>
+<dd><p>ignored</p></dd>
+
+
 </dl><p></p></div>
 </div>
 <div class="section">
@@ -121,16 +126,63 @@ Database class for duckdb and sqlite"><!-- mathjax --><script src="https://cdnjs
 <p>NULL</p>
 </div>
 
-</div><p></p><hr><a id="method-dbase-open_table"></a><div class="section">
-<h3 id="method-open-table-">Method <code>open_table()</code><a class="anchor" aria-label="anchor" href="#method-open-table-"></a></h3>
+</div><p></p><hr><a id="method-dbase-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
 
 <div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">open_table</span><span class="op">(</span><span class="va">table</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>...</code></dt>
+<dd><p>ignored</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
+<p>NULL
+create a db if not exits</p>
+</div>
+
+</div><p></p><hr><a id="method-dbase-open_db"></a><div class="section">
+<h3 id="method-open-db-">Method <code>open_db()</code><a class="anchor" aria-label="anchor" href="#method-open-db-"></a></h3>
+
+<div class="section">
+<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">open_db</span><span class="op">(</span>db <span class="op">=</span> <span class="cn">NULL</span>, table <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>db</code></dt>
+<dd><p>a character string specifying a database name.</p></dd>
+
+
+<dt><code>table</code></dt>
+<dd><p>a character string specifying a table name.</p></dd>
+
+
+<dt><code>...</code></dt>
+<dd><p>others to be passed to <code><a href="https://rdrr.io/pkg/duckdb/man/duckdb.html" class="external-link">duckdb::duckdb</a></code> or <code><a href="https://rsqlite.r-dbi.org/reference/SQLite.html" class="external-link">RSQLite::SQLite</a></code>, or <code>dbConnect</code></p></dd>
+
+
+</dl><p></p></div>
+</div>
+
+</div><p></p><hr><a id="method-dbase-open_table"></a><div class="section">
+<h3 id="method-open-table-">Method <code>open_table()</code><a class="anchor" aria-label="anchor" href="#method-open-table-"></a></h3>
+
+<div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">open_table</span><span class="op">(</span>table <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>table</code></dt>
 <dd><p>a character string specifying a table name.</p></dd>
 
@@ -138,38 +190,21 @@ Database class for duckdb and sqlite"><!-- mathjax --><script src="https://cdnjs
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>NULL</p>
-</div>
-
-</div><p></p><hr><a id="method-dbase-print"></a><div class="section">
-<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
-
-<div class="section">
-<h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
-</div>
-
-<div class="section">
-<h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt>
-<dd><p>ignored
-close db</p></dd>
-
-
-</dl><p></p></div>
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>NULL
+close db</p>
 </div>
 
 </div><p></p><hr><a id="method-dbase-finalize"></a><div class="section">
 <h3 id="method-finalize-">Method <code>finalize()</code><a class="anchor" aria-label="anchor" href="#method-finalize-"></a></h3>
 
 <div class="section">
-<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">finalize</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p>NULL
 close db</p>
 </div>
@@ -178,12 +213,12 @@ close db</p>
 <h3 id="method-close-">Method <code><a href="https://rdrr.io/r/base/connections.html" class="external-link">close()</a></code><a class="anchor" aria-label="anchor" href="#method-close-"></a></h3>
 
 <div class="section">
-<h4 id="usage-4">Usage<a class="anchor" aria-label="anchor" href="#usage-4"></a></h4>
+<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">close</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
+<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
 <p>NULL
 Read Tables</p>
 </div>
@@ -192,12 +227,12 @@ Read Tables</p>
 <h3 id="method-read-tables-">Method <code>read_tables()</code><a class="anchor" aria-label="anchor" href="#method-read-tables-"></a></h3>
 
 <div class="section">
-<h4 id="usage-5">Usage<a class="anchor" aria-label="anchor" href="#usage-5"></a></h4>
+<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">read_tables</span><span class="op">(</span>tables <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
+<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>tables</code></dt>
 <dd><p>a character vector specifying table names.</p></dd>
 
@@ -205,7 +240,7 @@ Read Tables</p>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-4">Returns<a class="anchor" aria-label="anchor" href="#returns-4"></a></h4>
+<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
 <p>list of <code>dataframe</code>
 Read Table</p>
 </div>
@@ -214,12 +249,12 @@ Read Table</p>
 <h3 id="method-read-table-">Method <code>read_table()</code><a class="anchor" aria-label="anchor" href="#method-read-table-"></a></h3>
 
 <div class="section">
-<h4 id="usage-6">Usage<a class="anchor" aria-label="anchor" href="#usage-6"></a></h4>
+<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">read_table</span><span class="op">(</span>table <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-4">Arguments<a class="anchor" aria-label="anchor" href="#arguments-4"></a></h4>
+<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>table</code></dt>
 <dd><p>a character string specifying a table name.</p></dd>
 
@@ -227,7 +262,7 @@ Read Table</p>
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-5">Returns<a class="anchor" aria-label="anchor" href="#returns-5"></a></h4>
+<h4 id="returns-6">Returns<a class="anchor" aria-label="anchor" href="#returns-6"></a></h4>
 <p><code>dataframe</code></p>
 </div>
 
@@ -235,12 +270,12 @@ Read Table</p>
 <h3 id="method-read-data-">Method <code>read_data()</code><a class="anchor" aria-label="anchor" href="#method-read-data-"></a></h3>
 
 <div class="section">
-<h4 id="usage-7">Usage<a class="anchor" aria-label="anchor" href="#usage-7"></a></h4>
+<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">read_data</span><span class="op">(</span><span class="va">...</span>, verbose <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-5">Arguments<a class="anchor" aria-label="anchor" href="#arguments-5"></a></h4>
+<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p><code><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">dplyr::filter</a></code> expressions</p></dd>
 
@@ -257,12 +292,12 @@ Write Table</p></dd>
 <h3 id="method-write-table-">Method <code>write_table()</code><a class="anchor" aria-label="anchor" href="#method-write-table-"></a></h3>
 
 <div class="section">
-<h4 id="usage-8">Usage<a class="anchor" aria-label="anchor" href="#usage-8"></a></h4>
+<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">write_table</span><span class="op">(</span><span class="va">value</span>, name <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, append <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-6">Arguments<a class="anchor" aria-label="anchor" href="#arguments-6"></a></h4>
+<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>value</code></dt>
 <dd><p><code>data.frame</code></p></dd>
 
@@ -292,12 +327,12 @@ Write Tables</p></dd>
 <h3 id="method-write-tables-">Method <code>write_tables()</code><a class="anchor" aria-label="anchor" href="#method-write-tables-"></a></h3>
 
 <div class="section">
-<h4 id="usage-9">Usage<a class="anchor" aria-label="anchor" href="#usage-9"></a></h4>
+<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">write_tables</span><span class="op">(</span><span class="va">values</span>, names <span class="op">=</span> <span class="cn">NULL</span>, overwrite <span class="op">=</span> <span class="cn">TRUE</span>, append <span class="op">=</span> <span class="cn">FALSE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-7">Arguments<a class="anchor" aria-label="anchor" href="#arguments-7"></a></h4>
+<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>values</code></dt>
 <dd><p>a list of <code>data.frame</code></p></dd>
 
@@ -324,12 +359,12 @@ Write Tables</p></dd>
 </div><p></p><hr><a id="method-dbase-clone"></a><div class="section">
 <h3 id="method-clone-">Method <code>clone()</code><a class="anchor" aria-label="anchor" href="#method-clone-"></a></h3>
 <p>The objects of this class are cloneable with this method.</p><div class="section">
-<h4 id="usage-10">Usage<a class="anchor" aria-label="anchor" href="#usage-10"></a></h4>
+<h4 id="usage-11">Usage<a class="anchor" aria-label="anchor" href="#usage-11"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">dbase</span><span class="op">$</span><span class="fu">clone</span><span class="op">(</span>deep <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
-<h4 id="arguments-8">Arguments<a class="anchor" aria-label="anchor" href="#arguments-8"></a></h4>
+<h4 id="arguments-9">Arguments<a class="anchor" aria-label="anchor" href="#arguments-9"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>deep</code></dt>
 <dd><p>Whether to make a deep clone.</p></dd>
 
