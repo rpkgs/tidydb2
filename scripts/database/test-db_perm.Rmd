@@ -25,16 +25,6 @@ con_mariadb = open_mariadb(dbinfo, 1)
 con <- open_mariadb()
 ```
 
-```{r}
-table = tbl(con, "China_Mete2000_hourly_2020_2022")
-
-system.time({
-  d <- table |>
-    filter(site == 50136) |>
-    collect()
-})
-```
-
 ## 测试基础命令
 
 ```{r}

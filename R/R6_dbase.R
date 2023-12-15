@@ -35,7 +35,7 @@ dbase <- R6Class("dbase", list(
     fun(sprintf("[db   ]: %s\n", self$db))
     fun(sprintf("[size ]: %.1f Mb\n", file.size(self$db) / 1e6))
 
-    tables <- DBI::dbListTables(db$con)
+    tables <- DBI::dbListTables(self$con)
     fun(sprintf("[Opened Table]: %s\n", self$table))
     fun(sprintf("[ALL   Tables]: %s\n", paste(tables, collapse = ", ")))
     print(self$tbl)

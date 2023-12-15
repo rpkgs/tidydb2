@@ -5,7 +5,8 @@ test_write_table <- function(f = "hello.db") {
   db$write_table(mtcars, "mtcars", append = TRUE)
   d = db$read_table("mtcars")
   expect_equal(nrow(d), 2 * nrow(mtcars))
-
+  print(db)
+  
   db$close()
   file.remove(f)
 }

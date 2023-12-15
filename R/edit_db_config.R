@@ -12,8 +12,9 @@ edit_db_config <- function() {
 #' @importFrom purrr `%||%`
 #' @export
 get_dbInfo <- function(name = NULL) {
-  config <- yaml::read_yaml("~/.db.yml")
-  if (file.exists(config)) {
+  f = normalizePath("~/.db.yml")
+  if (file.exists(f)) {
+    config <- yaml::read_yaml(f)
     name <- name %||% names(config)[1]
     if (name == "all") config else config[[name]]
   } else {
