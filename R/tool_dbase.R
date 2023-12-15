@@ -25,7 +25,7 @@ db_append <- function(con, tbl, values) {
 }
 
 #' @export 
-dbRemoveTables_like <- function(con, pattern="dbplyr", del=TRUE) {
+db_removeTablesLike <- function(con, pattern="dbplyr", del=TRUE) {
   tbls_bad = dbListTables(con) %>% .[grep(pattern, .)]
   # print(tbls_bad)  
   if (del) {
