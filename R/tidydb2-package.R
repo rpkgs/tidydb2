@@ -16,3 +16,14 @@ NULL
     )
   }
 }
+
+# library(dbplyr)
+# library(DBI)
+# library(RMySQL)
+# library(crayon)
+# library(dplyr)
+
+# library(Ipaper)
+# library(data.table)
+# library(tidymet)
+# library(tidydb2) # pak::pkg_install(c("rpkgs/tidydb2", "rpkgs/tidymet"))

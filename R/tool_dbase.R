@@ -1,13 +1,3 @@
-# library(dbplyr)
-# library(DBI)
-# library(RMySQL)
-# library(crayon)
-# library(dplyr)
-
-# library(Ipaper)
-# library(data.table)
-# library(tidymet)
-# library(tidydb) # pak::pkg_install(c("rpkgs/tidydb", "rpkgs/tidymet"))
 
 #' @import DBI dplyr crayon
 #' @importMethodsFrom DBI dbSendQuery
@@ -21,77 +11,6 @@ setMethod("dbSendQuery", c("MySQLConnection", "character"),
     new("MySQLResult", Id = rsId)
   }
 )
-
-#' get_dbInfo
-#' 
-#' Get DataBase info from `~/.db.yml`. You need to write config first, see 
-#' `vignette("database_config")` for details.
-#' 
-#' @importFrom purrr `%||%`
-#' @export
-get_dbInfo <- function(name = NULL) {
-  config = yaml::read_yaml("~/.db.yml")
-  name = name %||% names(config)[1]
-  if(name == "all") config else config[[name]]
-}
-
-#' Con database connection
-#' 
-#' @examples 
-#' \dontrun{
-#' dbinfo = get_dbInfo() # see which db to read
-#' open_mysql()
-#' open_mariadb()
-#' }
-#' 
-#' @export 
-#' @import DBI
-open_mysql <- function(dbname=1, dbinfo=NULL) {
-  dbinfo = dbinfo %||% get_dbInfo()
-  
-  if (is.numeric(dbname)) dbname = dbinfo$dbname[dbname]  
-  bold(Ipaper::ok(sprintf("[info] opening db: %s", dbname)))
-
-  dev = RMySQL::MySQL()
-  # dev = odbc::odbc()
-  # odbc::odbcListDrivers()
-  port = 3306
-  if (!is.null(dbinfo$port)) port = dbinfo$port
-
-  con <- dbConnect(dev, 
-    # driver = "MySQL ODBC 8.1 ANSI Driver",
-    host=dbinfo$host, port = port,
-    user=dbinfo$user, 
-    password=as.character(dbinfo$pwd), 
-    dbname = dbname)
-  return(con)
-}
-
-#' @rdname open_mysql
-#' @export 
-open_mariadb <- function(dbname=1, dbinfo=NULL) {
-  dbinfo = dbinfo %||% get_dbInfo()
-  
-  if (is.numeric(dbname)) dbname = dbinfo$dbname[dbname]  
-  bold(ok(sprintf("[info] opening db: %s", dbname)))
-
-  # dev = odbc::odbc()
-  # odbc::odbcListDrivers()
-  dev = RMariaDB::MariaDB()
-  port = 3306
-  if (!is.null(dbinfo$port)) port = dbinfo$port
-
-  con <- dbConnect(dev, 
-    load_data_local_infile = TRUE,
-    host=dbinfo$host, port = port,
-    user=dbinfo$user, 
-    password=as.character(dbinfo$pwd), 
-    database = dbname, 
-    dbname = dbname)
-  
-  str(dbGetInfo(con))
-  return(con)
-}
 
 #' @export
 db_info <- function(con) {
