@@ -15,10 +15,10 @@ Imports:
     dbplyr, dplyr, 
     DBI, 
     RMySQL, 
-    duckdb,
     crayon
 Suggests: 
     knitr,
+    duckdb,
     RMariaDB, RSQLite,
     yaml, 
     usethis,

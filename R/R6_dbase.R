@@ -12,9 +12,8 @@
 #' @param ... ignored
 #' @param overwrite a logical specifying whether to overwrite an existing table or not. Its default is FALSE.
 #' @param append a logical specifying whether to append to an existing table in the DBMS. Its default is FALSE.
-#' 
+#'
 #' @import R6
-#' @importFrom duckdb duckdb duckdb_shutdown
 #' @export
 dbase <- R6Class("dbase", list(
   db = NULL,
@@ -47,13 +46,13 @@ dbase <- R6Class("dbase", list(
     dbinfo <- get_dbInfo("duckdb")[[1]] # 默认是第一个
     if (is.null(db)) db <- dbinfo$db
     self$db <- db
-    
+
     if (is_duckdb(self$db)) {
       con <- dbConnect(duckdb::duckdb(), dbdir = self$db, ...)
     } else if (is_sqlite(self$db)) {
       con <- dbConnect(RSQLite::SQLite(), self$db, ...)
     }
-    
+
     self$con <- con
     self$open_table(table) # 可能会报错
   },
@@ -65,7 +64,7 @@ dbase <- R6Class("dbase", list(
       message("[warn] No table in current database!")
       return()
     }
-    
+
     if (is.null(table)) table <- DBI::dbListTables(self$con)[1]
     self$table <- table
     self$tbl <- tbl(self$con, self$table)
@@ -89,7 +88,7 @@ dbase <- R6Class("dbase", list(
   #' Read Tables
   #' @return list of `dataframe`
   read_tables = function(tables = NULL) {
-    if (is.null(tables)) tables <- DBI::dbListTables(db$con)
+    if (is.null(tables)) tables <- DBI::dbListTables(self$con)
     tables %<>% set_names(., .)
     lapply(tables, \(table) collect(tbl(self$con, table)))
   },
@@ -105,7 +104,6 @@ dbase <- R6Class("dbase", list(
   #' @param verbose a logical specifying whether to print the time or not.
   read_data = function(..., verbose = TRUE) {
     exprs <- rlang::enquos(...)
-
     suppressWarnings({
       t <- system.time({
         d <- filter(self$tbl, !!!exprs) |> collect()
@@ -125,6 +123,7 @@ dbase <- R6Class("dbase", list(
     .name <- deparse(substitute(value))
     name %<>% `%||%`(.name)
     if (append) overwrite <- FALSE
+
     dbWriteTable(self$con, name, value, overwrite = overwrite, append = append, ...)
   },
 
@@ -136,7 +135,7 @@ dbase <- R6Class("dbase", list(
   write_tables = function(values, names = NULL, overwrite = TRUE, append = FALSE, ...) {
     names %<>% `%||%`(names(values))
     for (i in seq_along(values)) {
-      self$write_table(names[i], values[[i]], overwrite, append, ...)
+      self$write_table(values[[i]], names[i], overwrite, append, ...)
     }
   }
 ))
