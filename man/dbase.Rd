@@ -30,6 +30,7 @@ Database class for duckdb and sqlite
 \item \href{#method-dbase-open_table}{\code{dbase$open_table()}}
 \item \href{#method-dbase-finalize}{\code{dbase$finalize()}}
 \item \href{#method-dbase-close}{\code{dbase$close()}}
+\item \href{#method-dbase-list_tables}{\code{dbase$list_tables()}}
 \item \href{#method-dbase-read_tables}{\code{dbase$read_tables()}}
 \item \href{#method-dbase-read_table}{\code{dbase$read_table()}}
 \item \href{#method-dbase-read_data}{\code{dbase$read_data()}}
@@ -144,6 +145,19 @@ close db
 
 \subsection{Returns}{
 NULL
+list of table names
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-dbase-list_tables"></a>}}
+\if{latex}{\out{\hypertarget{method-dbase-list_tables}{}}}
+\subsection{Method \code{list_tables()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{dbase$list_tables()}\if{html}{\out{</div>}}
+}
+
+\subsection{Returns}{
+character vector
 Read Tables
 }
 }

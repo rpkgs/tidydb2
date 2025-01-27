@@ -43,7 +43,13 @@ remotes::install_github("rpkgs/tidydb2")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+```r
+## 查找邻近站点的数据
+library(tidymet)
+st <- st_met2176_hourly
+p <- c(116.4, 39.9)
+find_near(p, st)
+```
 
 ```{r}
 library(tidydb2)

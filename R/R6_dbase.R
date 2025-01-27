@@ -85,6 +85,12 @@ dbase <- R6Class("dbase", list(
     # duckdb::duckdb_shutdown(duckdb())
   },
 
+  #' list of table names
+  #' @return character vector
+  list_tables = function() {
+    DBI::dbListTables(self$con)
+  },
+
   #' Read Tables
   #' @return list of `dataframe`
   read_tables = function(tables = NULL) {
@@ -123,7 +129,7 @@ dbase <- R6Class("dbase", list(
     .name <- deparse(substitute(value))
     name %<>% `%||%`(.name)
     if (append) overwrite <- FALSE
-
+    # TODO: show progress of dbWriteTable 
     dbWriteTable(self$con, name, value, overwrite = overwrite, append = append, ...)
   },
 
