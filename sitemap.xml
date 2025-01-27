@@ -1,48 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/database_config.html</loc>
-  </url>
-  <url>
-    <loc>/articles/database_tidydata.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/dbase.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_dbInfo.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/open_mysql.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reexports.html</loc>
-  </url>
-  <url>
-    <loc>/reference/tidydb2-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/timeinfo.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/LICENSE.html</loc></url>
+<url><loc>/articles/database_config.html</loc></url>
+<url><loc>/articles/database_tidydata.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/reference/dbase.html</loc></url>
+<url><loc>/reference/get_dbInfo.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/open_mysql.html</loc></url>
+<url><loc>/reference/reexports.html</loc></url>
+<url><loc>/reference/tidydb2-package.html</loc></url>
+<url><loc>/reference/timeinfo.html</loc></url>
 </urlset>
+
